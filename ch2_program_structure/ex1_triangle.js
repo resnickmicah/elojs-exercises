@@ -18,7 +18,7 @@ const triangleBaseLength = 7;
 for (let numHashes = 1; numHashes <= triangleBaseLength; numHashes++) {
     let nextLine = '#';
     // Feels dirty making this O(N^2)...
-    while(nextLine.length < numHashes) {
+    while (nextLine.length < numHashes) {
         nextLine += '#';
     }
     console.log(nextLine);
