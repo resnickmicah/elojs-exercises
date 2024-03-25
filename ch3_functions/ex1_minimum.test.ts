@@ -7,5 +7,7 @@ test("my min matches Math.min for random numeric values", () => {
         let b = Math.random();
 
         expect(Math.min(a, b) === min(a, b));
+        expect(Math.min(a, a) === min(a, a));
+        expect(Math.min(b, b) === min(b, b));
     }
 });
