@@ -16,23 +16,20 @@ const deepEqual = (first, second) => {
         return false;
     }
 
+    if (firstType !== "object" || secondType !== "object") {
+        return first === second;
+    }
+
     const firstNumKeys = Object.keys(first).length;
     const secondNumKeys = Object.keys(second).length;
     if (firstNumKeys != secondNumKeys) {
         return false;
     }
-
-    if (firstType === "object" && secondType === "object") {
-        let retval = true;
-        for (const key of Object.keys(first)) {
-            retval = retval && deepEqual(first[key], second[key]);
-        }
-        return retval;
-    } else {
-        return first === second;
+    let retval = true;
+    for (const key of Object.keys(first)) {
+        retval = retval && deepEqual(first[key], second[key]);
     }
-    console.log("Reached end of deepEqual without returning anything");
-    return false;
+    return retval;
 };
 
 let simpleObj = { here: "an", object: 2 };
@@ -47,3 +44,41 @@ console.log(`Deeper obj equality with simple obj (should be false): ${deepEqual(
 // → false
 console.log(`Deeper obj equality with literal with different addr (should be true): ${deepEqual(obj, { here: { is: "an" }, object: 2 })}`);
 // → true
+
+const obj1 = {
+    a: 1,
+    b: {
+        c: [1, 2, { d: /\d+/ }],
+        e: new Date('2023-05-11T00:00:00.000Z'),
+        f: undefined,
+        g: Symbol('foo'),
+        h: () => { },
+        i: Infinity,
+        j: NaN,
+        k: null
+    },
+    l: new Map([['a', 1], [{ b: 2 }, []]]),
+    m: new Set([1, 2, { a: 3 }]),
+    n: new WeakMap([[{}, {}]]),
+    o: new WeakSet([{}, {}])
+};
+
+const obj2 = {
+    a: 1,
+    b: {
+        c: [1, 2, { d: /\d+/ }],
+        e: new Date('2023-05-11T00:00:00.000Z'),
+        f: undefined,
+        g: Symbol('foo'),
+        h: () => { },
+        i: Infinity,
+        j: NaN,
+        k: null
+    },
+    l: new Map([['a', 1], [{ b: 2 }, []]]),
+    m: new Set([1, 2, { a: 3 }]),
+    n: new WeakMap([[{}, {}]]),
+    o: new WeakSet([{}, {}])
+};
+
+console.log(`WTF: (should be true): ${deepEqual(obj1, obj2)}`);
