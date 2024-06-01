@@ -66,9 +66,16 @@ class GroupIterator {
     }
 }
 
-for (let value of Group.from(["a", "b", "c"])) {
+let abc = Group.from(["a", "b", "c"]);
+for (let value of abc) {
     console.log(value);
 }
 // → a
 // → b
 // → c
+
+console.log("Iterate over the same object again:");
+
+for (let value of abc) {
+    console.log(value);
+}
