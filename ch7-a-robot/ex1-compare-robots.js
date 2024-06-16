@@ -9,6 +9,9 @@ function countRobotTurns(task, robot, memory) {
       let action = robot(task, memory);
       task = task.move(action.direction);
       memory = action.memory;
+      if (turn > 100) {
+        throw new Error("something ain't right... debug?");
+      }
     }
     return turn;
   }
@@ -31,4 +34,4 @@ function compareRobots(robot1, memory1, robot2, memory2) {
     console.log(`Robot 2 average number of turns per task: ${robot2TotalNumTurns / numTasks}`);
 }
 
-compareRobots(routeRobot, [], goalOrientedRobot, []);
+// compareRobots(routeRobot, [], goalOrientedRobot, []);

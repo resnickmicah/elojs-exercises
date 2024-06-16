@@ -15,7 +15,7 @@ function getShortestRoute(roadGraph, place, parcels) {
     }
 
     let dropoffs = parcels
-        .filter((p) => p.address != place)
+        .filter((p) => p.place == place)
         .map((p) => findRoute(roadGraph, place, p.address));
     let shortestDropoff;
     if (dropoffs.length > 0) {
@@ -34,14 +34,15 @@ function getShortestRoute(roadGraph, place, parcels) {
 }
 
 function betterRobot({ place, parcels }, route) {
-    console.log(`Current route: ${route}`);
+    // console.log(`Current route: ${route}`);
     if (route.length == 0) {
-        console.log(`Reached destination, getting next route: ${route}`);
+        // console.log(`Reached destination, getting next route: ${route}`);
         route = getShortestRoute(roadGraph, place, parcels);
-        console.log(`Found route ${route}`);
+        // console.log(`Found route ${route}`);
     }
     return { direction: route[0], memory: route.slice(1) };
 }
 
-runRobotAnimation(VillageState.random(),
-                  betterRobot, []);
+// runRobotAnimation(VillageState.random(), betterRobot, []);
+console.log("goal oriented vs. my robot comparison: ");
+compareRobots(goalOrientedRobot, [], betterRobot, []);
