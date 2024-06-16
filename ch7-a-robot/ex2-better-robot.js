@@ -15,10 +15,10 @@ function getShortestRoute(roadGraph, place, parcels) {
     }
 
     let dropoffs = parcels
-        .filter((p) => p.place == place)
-        .map((p) => findRoute(roadGraph, place, p.place));
+        .filter((p) => p.address != place)
+        .map((p) => findRoute(roadGraph, place, p.address));
     let shortestDropoff;
-    if (pickups.length > 0) {
+    if (dropoffs.length > 0) {
         shortestDropoff = dropoffs.reduce((min, current) => (current.length < min.length ? current : min), dropoffs[0]);
     }
     if (shortestPickup && !shortestDropoff) {
