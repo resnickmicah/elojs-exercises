@@ -14,13 +14,13 @@ class PGroup {
     }
 
     add(val) {
-        let newGroup = new Set(this.values);
+        const newGroup = new Set(this.values);
         newGroup.add(val);
         return new PGroup(newGroup); 
     }
 
     delete(val) {
-        let newGroup = new Set(this.values);
+        const newGroup = new Set(this.values);
         newGroup.delete(val);
         return new PGroup(newGroup);
     }
