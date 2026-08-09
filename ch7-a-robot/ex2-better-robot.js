@@ -43,6 +43,7 @@ function betterRobot({ place, parcels }, route) {
     return { direction: route[0], memory: route.slice(1) };
 }
 
+// To show the animation, uncomment the below line: "runRobotAnimation"
 // runRobotAnimation(VillageState.random(), betterRobot, []);
 console.log("goal oriented vs. my robot comparison: ");
 compareRobots(goalOrientedRobot, [], betterRobot, []);
